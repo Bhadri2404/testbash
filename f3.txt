@@ -1,8 +1,0 @@
-hello this is only for test
-thank you
-<<<<<<< HEAD
-regards
-testingbash 
-=======
-bye
->>>>>>> 2465e25d8cb3f1e467bbb8bd96de8773b933f78b
