@@ -6,6 +6,11 @@ agent any {
         sh 'echo "hello-world"'
 	}
        }
+    stage{
+      steps{
+        sh 'echo "disk space"'
+	}
+       }
      }
     }
  }
