@@ -7,24 +7,30 @@ env:
     IMAGE_NAME: hello
 
 jobs:
-    # docker:
-    #     runs-on: ubuntu-latest
-    #     steps:
+    docker:
+        strategy:
+            matrix:
+              os: [ubuntu-latest, windows-latest]
+              exclude:
+              - os: [ubuntu-latest, windows-latest]
 
-    #     - name: Repo Checkout
-    #       uses: actions/checkout@v3
+        runs-on: ${{matrix.os}}
+        steps:
 
-    #     - name: Docker Build
-    #       run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest -f .github/workflows/Dockerfile .
+        - name: Repo Checkout
+          uses: actions/checkout@v3
 
-    #     - name: list docker images
-    #       run: docker images
+        - name: Docker Build
+          run: docker build -t ${{ env.CONTAINER_REGISTRY }}/${{ vars.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:latest -f .github/workflows/Dockerfile .
 
-    #     - name: Docker Login
-    #       run: docker login --username="${{vars.DOCKER_USERNAME}}" --password="${{secrets.DOCKER_PASSWORD}}" \
+        - name: list docker images
+          run: docker images
+
+        - name: Docker Login
+          run: docker login --username="${{vars.DOCKER_USERNAME}}" --password="${{secrets.DOCKER_PASSWORD}}" \
         
-    #     - name: Docker Publish
-    #       run: docker push $CONTAINER_REGISTRY/${{vars.DOCKER_USERNAME}}/${{env.IMAGE_NAME}}:latest
+        - name: Docker Publish
+          run: docker push $CONTAINER_REGISTRY/${{vars.DOCKER_USERNAME}}/${{env.IMAGE_NAME}}:latest
 
     deploy:
         runs-on: ubuntu-latest
