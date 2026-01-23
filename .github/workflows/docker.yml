@@ -26,6 +26,13 @@ jobs:
         - name: Docker Publish
           run: docker push $CONTAINER_REGISTRY/${{vars.DOCKER_USERNAME}}/${{env.IMAGE_NAME}}:latest
 
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+
+        - name: Docker Pull and run
+          run: docker run bhadridevops/hello:latest
+
 
 
      
