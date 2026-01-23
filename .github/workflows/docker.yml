@@ -33,7 +33,8 @@ jobs:
         steps:
 
         - name: Docker Pull and run
-          run: docker run bhadridevops/hello:latest
+          run: docker run bhadridevops/hello:latest 
+          
 
 
 
